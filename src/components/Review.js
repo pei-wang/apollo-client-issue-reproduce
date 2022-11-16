@@ -130,7 +130,10 @@ export default ({ review }) => {
   const [editing, setEditing] = useState(false)
 
   const [removeReview] = useMutation(REMOVE_REVIEW_MUTATION, {
-    update: (cache) => cache.evict({ id: cache.identify(review) }),
+    update: (cache) => {
+      const result = cache.evict({ id: cache.identify(review) })
+      console.log(`cache evict result: ${result}`);
+    },
     // update: (cache) => {
     //   const { reviews } = cache.readQuery({ query: REVIEWS_QUERY })
     //   cache.writeQuery({
